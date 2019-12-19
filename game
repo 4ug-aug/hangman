@@ -16,20 +16,22 @@ hard = []
 
 # Give the user 6 guesses
 def playGame():
-    for word in word_list:
-        if len(word) < 5:
-            easy.append(word)
-        elif len(word) < 7:
-            medium.append(word)
-        elif 7 < len(word):
-            hard.append(word)
     if level == '1':
+        for word in word_list:
+            if len(word) < 5:
+                easy.append(word)
         gWord = random.choice(easy)
         l = 12
     elif level == '2':
+        for word in word_list:
+            if len(word) < 7:
+                medium.append(word)
         gWord = random.choice(medium)
         l = 8
     elif level == '3':
+        for word in word_list:
+            if 7 < len(word):
+                hard.append(word)
         gWord = random.choice(hard)
         l = 10
     for d in range(l):
