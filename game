@@ -7,8 +7,6 @@ from nltk.corpus import words
 word_list = words.words()
 
 # picking a random word and assigning it a dict
-# words = ['cat','lemon','orange','hangman']
-# gWord = random.choice(word_list)
 chars = {}
 level = str(input('1= easy, 2=medium, 3=hard: '))
 easy = []
