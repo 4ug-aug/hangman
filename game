@@ -6,51 +6,58 @@ import random
 from nltk.corpus import words
 word_list = words.words()
 
-# picking a random word and assigning it a dict
-chars = {}
+# Get desired level, assign variables to levels and assign a variable to the dictionary which is to hold each letter in the hidden word
 level = str(input('1= easy, 2=medium, 3=hard: '))
+chars = {}
 easy = []
 medium = []
 hard = []
 
 
-# Give the user 6 guesses
+# Give the user guesses according to the desired level
 def playGame():
+    # create list for each level according to the length of the word and give the player an amount of guesses depending on the level
     if level == '1':
         for word in word_list:
             if len(word) < 5:
                 easy.append(word)
         gWord = random.choice(easy)
-        l = 12
+        mg = 12
     elif level == '2':
         for word in word_list:
             if len(word) < 7:
                 medium.append(word)
         gWord = random.choice(medium)
-        l = 8
+        mg = 8
     elif level == '3':
         for word in word_list:
             if 7 < len(word):
                 hard.append(word)
         gWord = random.choice(hard)
-        l = 10
-    for d in range(l):
+        mg = 10
+    # where the guessing happens, mg = max_guesses and g = guesses so far
+    for g in range(mg):
         for i in gWord:
             chars.setdefault(i, 0)
             print(chars[i], end=' ')
-        guesses = str(d)
+        guesses = str(g)
         print('\nGuesses: '+guesses)
         print('Guess a letter or the word!: ')
         guess = input()
         if guess == gWord:
             print('Good job! You did it in '+guesses+' guess(es)!')
             break
+        # if the guess is one letter it will be assignes the word, if it is longer than a single letter ex: Carpenter - enter - each letter in the guess will be assigned
         if guess in gWord:
-            print(guess+' is in the hidden word!')
-            chars[guess] = guess
-            l+1
+            if len(guess) < 2:
+                print(guess+' is in the hidden word!')
+                chars[guess] = guess
+                mg+1
+            else:
+                for letter in guess:
+                    chars[letter] = letter 
         else:
-            print('guess not in the word! You have '+str(l-(d+1))+' guesses left')
+            print('guess not in the word! You have '+str(mg-(g+1))+' guesses left')
 
     print('The word was '+gWord)
 
